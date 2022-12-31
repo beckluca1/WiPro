@@ -24,11 +24,14 @@ int main()
     cout << z9 << endl;
 
 
-    GnuData data("test.tmp");
+    GnuData data("test.tmp", 12, 12);
 
-    for (int i = 0; i < 13; i++)
+    for (int i = 0; i < 13; i+=2)
     {
-        data.addDataPoint(i, 3 * i);
+        for (int j = 12; j >= 0; j--)
+        {
+            data.addDataPoint(3.1412956*i, 1.22*j, i + j * 5);
+        }
     }
 
     GnuPlotter::plotData(data);

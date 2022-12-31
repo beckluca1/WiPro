@@ -11,25 +11,50 @@ public:
 
 	vector<double> xCoords;
 	vector<double> yCoords;
+	vector<int> iterations;
 
-	GnuData(string inFileName)
+	int width;
+	int height;
+
+	GnuData(string inFileName, int inWidth, int inHeight)
 	{
 		fileName = inFileName;
+		width = inWidth;
+		height = inHeight;
 
 		xCoords = vector<double>(0);
 		yCoords = vector<double>(0);
+		iterations = vector<int>(0);
 	}
 
-	void addDataPoint(double inX, double inY)
+	void addDataPoint(double inX, double inY, int inIteration)
 	{
 		xCoords.push_back(inX);
 		yCoords.push_back(inY);
+		iterations.push_back(inIteration);
 	}
 
-	void addDataPoint(MyComplex complex)
+	void addDataPoint(MyComplex complex, int inIteration)
 	{
 		xCoords.push_back(complex.real);
 		yCoords.push_back(complex.im);
+		iterations.push_back(inIteration);
+	}
+
+	vector<vector<int>> sortData()
+	{
+		vector<vector<int>> indices;
+		for (int i = 0; i < xCoords.size(); i++)
+		{
+			while (xCoords[i] >= indices.size())
+			{
+				indices.push_back(vector<int>());
+			}
+
+			indices[int(xCoords[i])].push_back(i);
+		}
+
+		return indices;
 	}
 
 	void createFile()
@@ -42,9 +67,18 @@ public:
 			return;
 		}
 
-		for (int i = 0; i < xCoords.size(); i++)
+		vector<vector<int>> indices = sortData();
+
+		for (int i = 0; i < indices.size(); i++)
 		{
-			fprintf(fp, "%f %f\n", xCoords[i], yCoords[i]);
+			for (int j = 0; j < indices[i].size(); j++)
+			{
+				fprintf(fp, "%f %f %d\n", xCoords[indices[i][j]], yCoords[indices[i][j]], iterations[indices[i][j]]);
+			}
+			if (indices[i].size() != 0)
+			{
+				fprintf(fp, "\n");
+			}
 		}
 	}
 };
@@ -58,12 +92,12 @@ public:
 
 		FILE* gnupipe = NULL;
 
-		string plot = "plot '" + data.fileName + "'";
-		const char* gnucommands[] = { "set title \"Demos\"", plot.c_str()};
+		string plot = "splot '" + data.fileName + "' u 1:2:3";
+		const char* gnucommands[] = { "set title \"2D-Plot\"", "set pm3d map", plot.c_str()};
 
 		gnupipe = _popen("gnuplot -persistent", "w");
 
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			fprintf(gnupipe, "%s\n", gnucommands[i]);
 		}
