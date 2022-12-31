@@ -130,6 +130,8 @@
     <ClCompile Include="WiPro.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GnuPlotter.h" />
+    <ClInclude Include="MyComplex.h" />
     <ClInclude Include="WiPro.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

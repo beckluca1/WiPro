@@ -1,36 +1,35 @@
+#pragma once
+
 #include "WiPro.h"
 #pragma warning(disable:4996)
 
 int main()
 {
-    cout << "Hello World!\n";
+    MyComplex z1(2, 7);
+    MyComplex z2(42, -9);
+    MyComplex z3(-11, 19);
 
-    int x = 0;
-    int y = 0;
+    MyComplex z4 = z1 * z2;
+    MyComplex z5 = z1 + z2;
+    MyComplex z6 = (z1 + z2) * 2;
+    MyComplex z7 = (z2 + z3) * z1;
+    MyComplex z8 = 5 + z1;
+    MyComplex z9 = -z1 + z2;
 
-    FILE* gnupipe = NULL;
-    FILE* fp = NULL;
+    cout << z4 << endl;
+    cout << z5 << endl;
+    cout << z6 << endl;
+    cout << z7 << endl;
+    cout << z8 << endl;
+    cout << z9 << endl;
 
-    const char* gnucommands[] = {"set title \"Demos\"", "plot 'data.tmp'"};
 
-    fp = fopen("data.tmp", "w");
-
-    if (!fp) {
-        std::perror("File opening failed");
-        return 0;
-    }
-
-    gnupipe = _popen("gnuplot -persistent", "w");
+    GnuData data("test.tmp");
 
     for (int i = 0; i < 13; i++)
     {
-        fprintf(fp, "%d %d\n", x, y);
-        x += 2;
-        y += 1;
+        data.addDataPoint(i, 3 * i);
     }
 
-    for (int i = 0; i < 2; i++)
-    {
-        fprintf(gnupipe, "%s\n", gnucommands[i]);
-    }
+    GnuPlotter::plotData(data);
 }

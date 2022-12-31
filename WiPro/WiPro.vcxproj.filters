@@ -18,6 +18,12 @@
     <ClInclude Include="WiPro.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="GnuPlotter.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MyComplex.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WiPro.cpp">
