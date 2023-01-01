@@ -3,7 +3,7 @@
 #include "WiPro.h"
 #pragma warning(disable:4996)
 
-int main()
+int main() // Hallo
 {
     MyComplex z1(2, 7);
     MyComplex z2(42, -9);
