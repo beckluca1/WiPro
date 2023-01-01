@@ -13,21 +13,21 @@ public:
 	FILE* fp = NULL;
 	string fileName;
 
-	vector<vector<MyComplex>> positions;
-	vector<vector<int>> iterations;
+	vector<vector<MyComplex>>* positions;
+	vector<vector<int>>* iterations;
 
 	GnuData(string inFileName)
 	{
 		fileName = inFileName;
 
-		positions = vector<vector<MyComplex>>();
-		iterations = vector<vector<int>>();
+		positions = NULL;
+		iterations = NULL;
 	}
 
 	void setDataPoints(JuliaCalculator* calculator)
 	{
-		positions = calculator->positions;
-		iterations = calculator->iterations;
+		positions = &calculator->positions; //Frägt die Referenz an, nicht das Objekt selbst --> Datensparen!
+		iterations = &calculator->iterations;
 	}
 
 	void createFile()
@@ -40,11 +40,11 @@ public:
 			return;
 		}
 
-		for (int i = 0; i < positions.size(); i++)
+		for (int i = 0; i < positions->size(); i++)
 		{
-			for (int j = 0; j < positions[i].size(); j++)
+			for (int j = 0; j < (*positions)[i].size(); j++)
 			{
-				fprintf(fp, "%f %f %d\n", positions[i][j].real, positions[i][j].im, iterations[i][j]);
+				fprintf(fp, "%f %f %d\n", (*positions)[i][j].real, (*positions)[i][j].im, (*iterations)[i][j]);
 			}
 
 			fprintf(fp, "\n");

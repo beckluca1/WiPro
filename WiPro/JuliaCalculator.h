@@ -1,10 +1,12 @@
-#pragma once
+#pragma once //Vermeiden von Mehrfacheinbindung
 
-#include "MyComplex.h"
+#include "MyComplex.h"  //Einbinden der Klasse für komplexe Zahlen
 
 class JuliaCalculator
 {
 public:
+
+	//Werte aus JuliaTabelle
 	MyComplex minValue;
 	MyComplex maxValue;
 	int realStep;
@@ -14,9 +16,11 @@ public:
 	double maxRadius;
 	MyComplex constant;
 
+	//Datenpunkte für Diagramm
 	vector<vector<int>> iterations;
 	vector<vector<MyComplex>> positions;
 
+	//Standartkonstruktor mit Standartwerten
 	JuliaCalculator()
 	{
 		minValue = MyComplex(0,0);
@@ -29,6 +33,7 @@ public:
 		constant = MyComplex(0, 0);
 	}
 
+	//Konstruktor für Endanwendung
 	JuliaCalculator(MyComplex inMinValue, MyComplex inMaxValue, int inRealStep, int inImStep, int inExponent, int inMaxIteration, double inMaxRadius, MyComplex inConstant)
 	{
 		minValue = inMinValue;
@@ -41,6 +46,7 @@ public:
 		constant = inConstant;
 	}
 
+	//Berechnen der Folge
 	int iterateDataPoint(MyComplex value, MyComplex newConstant)
 	{
 		MyComplex currentValue = value;
@@ -55,6 +61,7 @@ public:
 		return maxIteration;
 	}
 
+	//Rechnet iterativ für alle Datenpunkte die Folgen aus --> Aufgabe 2) 
 	void calculateFixedConstant()
 	{
 		iterations = vector<vector<int>>();
@@ -84,6 +91,7 @@ public:
 		}
 	}
 
+	//
 	void calculateFixedStart()
 	{
 		iterations = vector<vector<int>>();
