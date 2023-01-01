@@ -1,4 +1,4 @@
-#pragma once
+#pragma once //Mehrfacheinbindung verhindern
 
 #include <iostream>
 
@@ -7,26 +7,32 @@ using namespace std;
 class MyComplex
 {
 public:
+
+	//Variablen der Instanzen
 	double real;
 	double im;
 
+	//Standartkonstuktor mit Standartwerten
 	MyComplex()
 	{
 		real = 0;
 		im = 0;
 	}
 
+	//Konstruktor mit Eingabemöglichkeit
 	MyComplex(double inReal, double inIm)
 	{
 		real = inReal;
 		im = inIm;
 	}
 
+	//Berechnet die Norm der komplexen Zahl (Betrag, Länge, ...)
 	double norm()
 	{
 		return sqrt(pow(real, 2) + pow(im, 2));
 	}
 
+	//Berechnet komplexe Zahl^Exponent
 	MyComplex power(int exponent)
 	{
 		MyComplex value = MyComplex(real, im);
@@ -38,6 +44,8 @@ public:
 
 		return value;
 	}
+
+	//Definition allgemeiner mathematischer Zusammenhänge//
 
 	MyComplex operator+()
 	{

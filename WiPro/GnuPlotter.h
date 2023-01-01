@@ -1,6 +1,8 @@
-#pragma once
-#pragma warning(disable:4996)
+#pragma once //Mehrfacheinbindung verhindern
+#pragma warning(disable:4996) //Unterdrücken von Warnungen bei Nutzung von fopen (statt fopen_s)
 
+
+//Inkludieren der notwendigen Klassen
 #include "JuliaCalculator.h"
 #include "MyComplex.h"
 
@@ -26,20 +28,25 @@ public:
 
 	void setDataPoints(JuliaCalculator* calculator)
 	{
-		positions = &calculator->positions; //Frägt die Referenz an, nicht das Objekt selbst --> Datensparen!
+		//Frägt die Referenz an, nicht das Objekt selbst --> Datensparen!
+		positions = &calculator->positions; 
 		iterations = &calculator->iterations;
 	}
 
-	void createFile()
+	//Erstellen der Datei mit allen Datenpunkten und deren Werte
+	void createFile() 
 	{
-		fp = fopen(fileName.c_str(), "w");
+		//Automatisierte Erstellung der Datei
+		fp = fopen(fileName.c_str(), "w"); 
 
-		if (!fp)
+		////Error bei Fehler bei Dateierstellung
+		if (!fp) 
 		{
 			std::perror("File opening failed");
 			return;
 		}
 
+		//Schreiben der Datenpunkte und ihrer Werte in die Datei
 		for (int i = 0; i < positions->size(); i++)
 		{
 			for (int j = 0; j < (*positions)[i].size(); j++)
@@ -52,6 +59,7 @@ public:
 	}
 };
 
+//Aufrufen der Gnuplot-Befehle und damit grafische Ausgabe
 class GnuPlotter
 {
 public:

@@ -1,5 +1,5 @@
 #include "WiPro.h"  //Einbetten aller verwendeter Klassen
-#pragma warning(disable:4996) //Unterdrücken von Warnung bei Nutzung von Gnuplot
+
 
 int main() //Hauptprogramm
 {

@@ -61,7 +61,7 @@ public:
 		return maxIteration;
 	}
 
-	//Rechnet iterativ für alle Datenpunkte die Folgen aus --> Aufgabe 2) 
+	//Rechnet iterativ für alle Datenpunkte die Folgen aus, variabler Startwert --> Aufgabe 2) 
 	void calculateFixedConstant()
 	{
 		iterations = vector<vector<int>>();
@@ -91,7 +91,7 @@ public:
 		}
 	}
 
-	//
+	//Rechnet iterativ für alle Datenpunkte die Folgen aus, variable Konstante --> Aufgabe 2) 
 	void calculateFixedStart()
 	{
 		iterations = vector<vector<int>>();
