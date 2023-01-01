@@ -26,6 +26,19 @@ public:
 		im = inIm;
 	}
 
+	//Getter-Funktion
+	double real() 
+	{
+		return real;
+	}
+
+	//Getter-Funktion
+	double imag() 
+	{
+		return im;
+	}
+
+
 	//Berechnet die Norm der komplexen Zahl (Betrag, Länge, ...)
 	double norm()
 	{
