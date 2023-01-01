@@ -24,6 +24,9 @@
     <ClInclude Include="MyComplex.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="JuliaCalculator.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WiPro.cpp">

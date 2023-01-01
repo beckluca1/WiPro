@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GnuPlotter.h" />
+    <ClInclude Include="JuliaCalculator.h" />
     <ClInclude Include="MyComplex.h" />
     <ClInclude Include="WiPro.h" />
   </ItemGroup>

@@ -1,7 +1,8 @@
 #pragma once
-#pragma warning(disable:4996)
 
-#include "WiPro.h"
+#include <iostream>
+
+using namespace std;
 
 class MyComplex
 {
@@ -26,7 +27,19 @@ public:
 		return sqrt(pow(real, 2) + pow(im, 2));
 	}
 
-	MyComplex& operator+()
+	MyComplex power(int exponent)
+	{
+		MyComplex value = MyComplex(real, im);
+
+		for (int i = 0; i < exponent - 1;i++)
+		{
+			value *= MyComplex(real, im);
+		}
+
+		return value;
+	}
+
+	MyComplex operator+()
 	{
 		MyComplex out;
 		out.real = real;
@@ -35,7 +48,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator-()
+	MyComplex operator-()
 	{
 		MyComplex out;
 		out.real = -real;
@@ -44,7 +57,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator+(MyComplex& rhs)
+	MyComplex operator+(MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real + rhs.real;
@@ -53,7 +66,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator+(const MyComplex& rhs)
+	MyComplex operator+(const MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real + rhs.real;
@@ -62,7 +75,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator+(double& rhs)
+	MyComplex operator+(double& rhs)
 	{
 		MyComplex out;
 		out.real = real + rhs;
@@ -71,7 +84,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator+(double& lhs, MyComplex& rhs)
+	friend MyComplex operator+(double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs + rhs.real;
@@ -80,7 +93,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator+(const double& rhs)
+	MyComplex operator+(const double& rhs)
 	{
 		MyComplex out;
 		out.real = real + rhs;
@@ -89,7 +102,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator+(const double& lhs, MyComplex& rhs)
+	friend MyComplex operator+(const double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs + rhs.real;
@@ -128,7 +141,7 @@ public:
 		return *this;
 	}
 
-	MyComplex& operator-(MyComplex& rhs)
+	MyComplex operator-(MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real - rhs.real;
@@ -137,7 +150,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator-(const MyComplex& rhs)
+	MyComplex operator-(const MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real - rhs.real;
@@ -146,7 +159,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator-(double& rhs)
+	MyComplex operator-(double& rhs)
 	{
 		MyComplex out;
 		out.real = real - rhs;
@@ -155,7 +168,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator-(double& lhs, MyComplex& rhs)
+	friend MyComplex operator-(double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs - rhs.real;
@@ -164,7 +177,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator-(const double& rhs)
+	MyComplex operator-(const double& rhs)
 	{
 		MyComplex out;
 		out.real = real - rhs;
@@ -173,7 +186,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator-(const double& lhs, MyComplex& rhs)
+	friend MyComplex operator-(const double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs - rhs.real;
@@ -212,7 +225,7 @@ public:
 		return *this;
 	}
 
-	MyComplex& operator*(MyComplex& rhs)
+	MyComplex operator*(MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real * rhs.real - im * rhs.im;
@@ -221,7 +234,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator*(const MyComplex& rhs)
+	MyComplex operator*(const MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = real * rhs.real - im * rhs.im;
@@ -230,7 +243,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator*(double& rhs)
+	MyComplex operator*(double& rhs)
 	{
 		MyComplex out;
 		out.real = real * rhs;
@@ -239,7 +252,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator*(double& lhs, MyComplex& rhs)
+	friend MyComplex operator*(double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs * rhs.real;
@@ -248,7 +261,7 @@ public:
 		return out;
 	}
 
-	MyComplex& operator*(const double& rhs)
+	MyComplex operator*(const double& rhs)
 	{
 		MyComplex out;
 		out.real = real * rhs;
@@ -257,7 +270,7 @@ public:
 		return out;
 	}
 
-	friend MyComplex& operator*(const double& lhs, MyComplex& rhs)
+	friend MyComplex operator*(const double& lhs, MyComplex& rhs)
 	{
 		MyComplex out;
 		out.real = lhs * rhs.real;
@@ -268,16 +281,18 @@ public:
 
 	MyComplex& operator*=(MyComplex& rhs)
 	{
+		double tempReal = real;
 		real = real * rhs.real - im * rhs.im;
-		im = real * rhs.im + im * rhs.real;
+		im = tempReal * rhs.im + im * rhs.real;
 
 		return *this;
 	}
 
 	MyComplex& operator*=(const MyComplex& rhs)
 	{
+		double tempReal = real;
 		real = real * rhs.real - im * rhs.im;
-		im = real * rhs.im + im * rhs.real;
+		im = tempReal * rhs.im + im * rhs.real;
 
 		return *this;
 	}
@@ -300,14 +315,16 @@ public:
 
 	MyComplex& operator=(MyComplex& copy)
 	{
-		MyComplex out(copy.real, copy.im);
-		return out;
+		real = copy.real;
+		im = copy.im;
+		return *this;
 	}
 
 	MyComplex& operator=(const MyComplex& copy)
 	{
-		MyComplex out(copy.real, copy.im);
-		return out;
+		real = copy.real;
+		im = copy.im;
+		return *this;
 	}
 
 	friend ostream& operator<<(ostream& stream, MyComplex& num)

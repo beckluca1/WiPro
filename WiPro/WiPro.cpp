@@ -23,16 +23,11 @@ int main()
     cout << z8 << endl;
     cout << z9 << endl;
 
+    JuliaCalculator calculator1(MyComplex(-2.0,-1.0), MyComplex(1.0,1.0), 750, 500, 2, 200, 2.0, MyComplex(0.0, 0.0));
+    calculator1.calculateFixedStart();
 
-    GnuData data("test.tmp", 12, 12);
-
-    for (int i = 0; i < 13; i+=2)
-    {
-        for (int j = 12; j >= 0; j--)
-        {
-            data.addDataPoint(3.1412956*i, 1.22*j, i + j * 5);
-        }
-    }
+    GnuData data("test.tmp");
+    data.setDataPoints(&calculator1);
 
     GnuPlotter::plotData(data);
 }

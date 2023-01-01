@@ -3,7 +3,8 @@
 #include <cstdlib>
 #include <vector>
 
-#include "GnuPlotter.h"
 #include "MyComplex.h"
+#include "JuliaCalculator.h"
+#include "GnuPlotter.h"
 
 using namespace std;
