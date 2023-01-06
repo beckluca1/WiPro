@@ -26,13 +26,13 @@ public:
 		im = inIm;
 	}
 
-	//Getter-Funktion
+	//Getter-Funktion (nicht wie gefordert benannt, da sonst die public variable hätte umbenannt werden müssen)
 	double realGetter() 
 	{
 		return real;
 	}
 
-	//Getter-Funktion
+	//Getter-Funktion (nicht wie gefordert benannt, da sonst die public variable hätte umbenannt werden müssen)
 	double imagGetter() 
 	{
 		return im;
