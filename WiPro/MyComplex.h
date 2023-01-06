@@ -27,13 +27,13 @@ public:
 	}
 
 	//Getter-Funktion
-	double real() 
+	double realGetter() 
 	{
 		return real;
 	}
 
 	//Getter-Funktion
-	double imag() 
+	double imagGetter() 
 	{
 		return im;
 	}
